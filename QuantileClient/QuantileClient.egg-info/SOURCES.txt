@@ -1,0 +1,7 @@
+README.md
+setup.py
+QuantileClient.egg-info/PKG-INFO
+QuantileClient.egg-info/SOURCES.txt
+QuantileClient.egg-info/dependency_links.txt
+QuantileClient.egg-info/requires.txt
+QuantileClient.egg-info/top_level.txt

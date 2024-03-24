@@ -1,3 +1,16 @@
+Metadata-Version: 2.1
+Name: QuantileClient
+Version: 0.1
+Summary: Its a wrapper lib from quantile ai api service
+Home-page: https://github.com/Quantileaidev/QuantileClientLib
+Author: QuantileaiDev
+Author-email: quantileai@gmail.com
+License: MIT
+Description-Content-Type: text/markdown
+Requires-Dist: python-dotenv
+Requires-Dist: requests
+Requires-Dist: json
+
 # QuantileClientLib
 
 QuantileClient is a Python client library designed to serve as a wrapper for the Quantile AI API. It simplifies the process of interacting with Quantile's LLM models, enabling developers to seamlessly integrate Quantile's capabilities into their Python applications.
