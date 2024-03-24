@@ -7,7 +7,6 @@ setup(
     install_requires=[
         'python-dotenv',
         'requests',
-        'json'
     ],
     author='QuantileaiDev',
     author_email='quantileai@gmail.com',
