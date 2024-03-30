@@ -128,4 +128,22 @@ class QuantileClient:
         }
         response = requests.get(url, headers=headers, params=params)
         return response.json()
-
+    
+    def image_gen(self,prompt,model,width,height,num_images,quality):
+        url = f"{self.base_url}/image_generation"
+        headers = {
+            "accept": "application/json",
+            "quant-api-key": self.api_key
+        }
+        params = {
+            "prompt": prompt,
+            "model": model,
+            "width": width,
+            "height": height,
+            "num_images": num_images,
+            "quality": quality
+        
+        }
+        response = requests.get(url, headers=headers, params=params)
+        return response.json()
+    
