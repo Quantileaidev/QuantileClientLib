@@ -8,6 +8,63 @@ pip install QuantileClient
 
 ```
 
+## All New Rag Chat
+Introducing Rag Chat 2.0 – your go-to solution for seamless file uploads and effortless chatting! No more cumbersome links or complicated interfaces. It's as easy as upload, chat, and connect.
+
+With Rag Chat 2.0, simplicity is key. Just upload your files with a click and dive straight into conversation. No more endless waiting for links to load or struggling with tangled chains of language
+*Simple*
+*effictive*
+*Easy to integrate*
+
+```bash
+pip install QuantileClient
+
+```
+**File upload**
+
+```python
+
+from QuantileClient import QuantileClient
+
+base_url = "http://<api url>"  # Replace with quantileai api base URL
+api_key = "<your-api-quant-api-key>"
+
+client = QuantileClient(base_url, api_key)
+
+rag_upload = client.rag_data_upload(
+    db_name = "mytest",  #name the db here always remember this
+    pdf_file ="test2.pdf", #path to pdf
+    chunk_size=100, 
+    chunk_overlap=10,
+    embedding_model="text-embedding-3-small",
+)
+print(rag_upload)
+
+```
+**Rag Chat**
+
+```python
+
+from QuantileClient import QuantileClient
+
+base_url = "http://<api url>"  # Replace with quantileai api base URL
+api_key = "<your-api-quant-api-key>"
+
+client = QuantileClient(base_url, api_key)
+
+rag_assitant = client.rag_chat(
+    db_name="mytest",
+    description="talk in slang", #give deep desc for how it will act
+    question = "My question is why quantILE Ai is soo cool",
+    #embedding_model="text-embedding-3-small",
+    #inference_model="gpt-3.5-turbo-0125",
+    #temperature=0
+)
+print(rag_assitant)
+
+```
+
+
 ```python
 
 from QuantileClient import QuantileClient
