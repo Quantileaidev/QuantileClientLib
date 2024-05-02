@@ -9,11 +9,11 @@ pip install QuantileClient
 ```
 
 ## All New Rag Chat
-Introducing Rag Chat 2.0 – your go-to solution for seamless file uploads and effortless chatting! No more cumbersome links or complicated interfaces. It's as easy as upload, chat, and connect.
+Introducing Rag Chat 1.0 – your go-to solution for seamless file uploads and effortless chatting! No more cumbersome links or complicated interfaces. It's as easy as upload, chat, and connect.
 
-With Rag Chat 2.0, simplicity is key. Just upload your files with a click and dive straight into conversation. No more endless waiting for links to load or struggling with tangled chains of language
-*Simple*
-*effictive*
+With Rag Chat 1.0, simplicity is key. Just upload your files with a click and dive straight into conversation. No more endless waiting for links to load or struggling with tangled chains of language its
+*Simple*,
+*effictive*,
 *Easy to integrate*
 
 ```bash
@@ -64,8 +64,11 @@ print(rag_assitant)
 
 ```
 
+## Chat with varoius model
+Start conversing with different LLM models using just one Key. Say goodbye to the inconvenience of juggling multiple platforms or creating numerous accounts
 
 ```python
+
 
 from QuantileClient import QuantileClient
 
@@ -80,14 +83,17 @@ openai_response = client.generate_openai_response(
         model="gpt-3.5-turbo-0125",
         messages=[{"role": "system", "content": prompt},
                   ],
-        max_tokens=100
+        max_tokens=100,
+        parsed_output=True #to give just the output not whole response
     )
 
 anthropic_response = client.generate_anthropic_response(
         model="claude-2.1",
         messages=[{"role": "system", "content": prompt},
                   ],
-        max_tokens=100
+        max_tokens=100,
+        parsed_output=True #to give just the output not whole response
+
     )
 
 cohere_respose = client.generate_cohere_response(
@@ -122,7 +128,8 @@ prompt = "what is an api"
 
 callcascade = client.call_cascading(
     prompt="tell me the word news and something abt apis",
-    max_tokens=100
+    max_tokens=100,
+    parsed_output=True #to give just the output not whole response
     
 )
 print(f"My callcascade response is {callcascade}")
@@ -153,6 +160,16 @@ image_gen_response = client.image_gen(
 print(f"My image gen response is {image_gen_response}")
 
 ```
+
+| Provider      | Completion | Async Completion | rag_chat | image generation |
+| ------------- | ---------- | ---------------- | -------- | ---------------- |
+| OpenAI        | ✅         | ✅               | ✅       | ✅               |
+| deepinfra     | ✅         | ✅               | ✅       | ✅               |
+| perplexity-ai | ✅         | ✅               |          |                  |
+| anthropic     | ✅         | ✅               | ✅       |                  |
+| cohere        | ✅         |                  |          |                  |
+| huggingface   | ✅         |                  |          | ✅               |
+
 
 ### License
 MIT
