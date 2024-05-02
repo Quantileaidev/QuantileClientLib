@@ -19,7 +19,7 @@ class QuantileClient:
             f.write(f"API_KEY={api_key}")
 
     def generate_openai_response(self, model, messages, tools=None, tool_choice=None, max_tokens=None,
-                                 temperature=None, top_p=None, frequency_penalty=None, presence_penalty=None):
+                                 temperature=None, top_p=None, frequency_penalty=None, presence_penalty=None,parsed_output=False):
         messages_json = json.dumps(messages)
         url = f"{self.base_url}/generate_openai_response"
         headers = {
@@ -35,12 +35,13 @@ class QuantileClient:
             "temperature": temperature,
             "top_p": top_p,
             "frequency_penalty": frequency_penalty,
-            "presence_penalty": presence_penalty
+            "presence_penalty": presence_penalty,
+            "parese_output": parsed_output
         }
         response = requests.get(url, headers=headers, params=payload)
         return response.json()
 
-    def generate_anthropic_response(self, messages, model=None, max_tokens=None, temperature=None):
+    def generate_anthropic_response(self, messages, model=None, max_tokens=None, temperature=None,parsed_output=False):
         url = f"{self.base_url}/generate_anthropic_response"
         messages_json = json.dumps(messages)
 
@@ -52,12 +53,13 @@ class QuantileClient:
             "messages": messages_json,
             "model": model,
             "max_tokens": max_tokens,
-            "temperature": temperature
+            "temperature": temperature,
+            "parese_output": parsed_output
         }
         response = requests.get(url, headers=headers, params=payload)
         return response.json()
 
-    def generate_deepinfra_response(self, messages, model=None, max_tokens=None, temperature=None):
+    def generate_deepinfra_response(self, messages, model=None, max_tokens=None, temperature=None,parsed_output=False):
         url = f"{self.base_url}/generate_deepinfra_response"
         messages_json = json.dumps(messages)
 
@@ -69,7 +71,8 @@ class QuantileClient:
             "messages":messages_json,
             "model": model,
             "max_tokens": max_tokens,
-            "temperature": temperature
+            "temperature": temperature,
+            "parese_output":parsed_output
         }
         response = requests.get(url, headers=headers, params=payload)
         return response.json()
@@ -114,7 +117,7 @@ class QuantileClient:
         response = requests.get(url, headers=headers, params=payload)
         return response.json()
     
-    def call_cascading(self,prompt, max_tokens=None,temperature=None):
+    def call_cascading(self,prompt, max_tokens=None,temperature=None,parsed_output=False):
         
         url = f"{self.base_url}/call_cascading"
         headers = {
@@ -124,8 +127,74 @@ class QuantileClient:
         params = {
             "prompt": prompt,
             "max_tokens": max_tokens,
-            "temperature":temperature
+            "temperature":temperature,
+            "parese_output":parsed_output
         }
         response = requests.get(url, headers=headers, params=params)
         return response.json()
+    
+    def image_gen(self,prompt,model,width,height,num_images,quality):
+        url = f"{self.base_url}/image_generation"
+        headers = {
+            "accept": "application/json",
+            "quant-api-key": self.api_key
+        }
+        params = {
+            "prompt": prompt,
+            "model": model,
+            "width": width,
+            "height": height,
+            "num_images": num_images,
+            "quality": quality
+        
+        }
+        response = requests.get(url, headers=headers, params=params)
+        return response.json()
+    def rag_data_upload(self, db_name, pdf_file, chunk_size=100, chunk_overlap=10, embedding_model="text-embedding-3-small"):
+        url = f"{self.base_url}/rag_data_upload"
+        
+        headers = {
+            "accept": "application/json",
+            "quant-api-key": self.api_key
+        }
+        
+        params = {
+            "db_name": db_name,
+            "pdf_file": pdf_file,
+            "chunk_size": chunk_size,
+            "chunk_overlap": chunk_overlap,
+            "embedding_model": embedding_model
+        }
+        if not os.path.exists(pdf_file):
+            return {"error": "File not found"}
+        
+        with open(pdf_file, 'rb') as file:
+            files = {'pdf_file': (os.path.basename(pdf_file), file)}
+            response = requests.post(url, headers=headers, params=params, files=files)
+        
+        return response.json()
+    def rag_chat(self,db_name,description,question,embedding_model="text-embedding-3-small",inference_model="gpt-3.5-turbo-0125",temperature=0):
+        url = f"{self.base_url}/rag_assistant"
+        
+        headers = {
+            "accept": "application/json",
+            "quant-api-key": self.api_key
+        }
+        params = {
+            "db_name": db_name,
+            "description": description,
+            "question": question,
+            "embedding_model": embedding_model,
+            "inference_model": inference_model,
+            "temperature": temperature
+        }
+        
+        response = requests.get(url, headers=headers, params=params)
+        return response.json()
 
+        
+ 
+        
+
+        
+    
