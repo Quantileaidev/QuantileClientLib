@@ -2,3 +2,6 @@ venv
 unit_test.py
 test.pdf
 test2.pdf
+QuantileClient/build
+QuantileClient/dist
+QuantileClient/QuantileClient.egg-info
