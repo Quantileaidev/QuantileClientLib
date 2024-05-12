@@ -173,7 +173,7 @@ class QuantileClient:
             response = requests.post(url, headers=headers, params=params, files=files)
         
         return response.json()
-    def rag_chat(self,db_name,description,question,embedding_model="text-embedding-3-small",inference_model="gpt-3.5-turbo-0125",temperature=0):
+    def rag_chat(self,db_name,description,question,embedding_model="text-embedding-3-small",inference_model="gpt-3.5-turbo-0125",temperature=0,max_token:int=500,k:int=1):
         url = f"{self.base_url}/rag_assistant"
         
         headers = {
@@ -186,7 +186,9 @@ class QuantileClient:
             "question": question,
             "embedding_model": embedding_model,
             "inference_model": inference_model,
-            "temperature": temperature
+            "temperature": temperature,
+            "max_token":max_token,
+            "k":k
         }
         
         response = requests.get(url, headers=headers, params=params)

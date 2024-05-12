@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: QuantileClient
-Version: 0.3
+Version: 0.4
 Summary: Its a wrapper lib from quantile ai api service
 Home-page: https://github.com/Quantileaidev/QuantileClientLib
 Author: QuantileaiDev

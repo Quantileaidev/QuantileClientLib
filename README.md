@@ -2,11 +2,7 @@
 
 QuantileClient is a Python client library designed to serve as a wrapper for the Quantile AI API. It simplifies the process of interacting with Quantile's AI supported platfroms LLMs, enabling developers to seamlessly integrate Quantile's capabilities into their Python applications.
 
-
-```bash
-pip install QuantileClient
-
-```
+[Offical Documentation](https://quantileai.in/documentation)
 
 ## All New Rag Chat
 Introducing Rag Chat 1.0 – your go-to solution for seamless file uploads and effortless chatting! No more cumbersome links or complicated interfaces. It's as easy as upload, chat, and connect.
@@ -56,9 +52,11 @@ rag_assitant = client.rag_chat(
     db_name="mytest",
     description="talk in slang", #give deep desc for how it will act
     question = "My question is why quantILE Ai is soo cool",
-    #embedding_model="text-embedding-3-small",
-    #inference_model="gpt-3.5-turbo-0125",
-    #temperature=0
+    embedding_model="text-embedding-3-small",
+    inference_model="gpt-3.5-turbo-0125",
+    temperature=0,
+    max_token = 1000,
+    k=2  
 )
 print(rag_assitant)
 
